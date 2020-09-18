@@ -1,24 +1,26 @@
-package com.cb.translate.service;
+package com.bhy.translatefree.translate;
 
-import com.cb.translate.domain.TranslateRequest;
+import com.bhy.translatefree.translate.domain.TranslateRequest;
 import com.google.api.gax.retrying.RetrySettings;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.Translate.TranslateOption;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.threeten.bp.Duration;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+
 /**
- * @author luxingxiao
+ * @author oceanBin
  */
 @Slf4j
 @Service
-public class TranslateService {
+public class GoogleTranslateService {
 
   public List<String> translate(TranslateRequest translateRequest) {
     try {
@@ -44,7 +46,7 @@ public class TranslateService {
               TranslateOption.sourceLanguage(translateRequest.getSource()),
               TranslateOption.targetLanguage(translateRequest.getTarget()));
 
-      return result.stream().map(r -> r.getTranslatedText()).collect(Collectors.toList());
+      return result.stream().map(Translation::getTranslatedText).collect(Collectors.toList());
     } catch (Exception e) {
       log.error(e.getMessage(), e);
       throw new InternalError("翻译接口调用失败");

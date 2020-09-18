@@ -1,10 +1,12 @@
-package com.cb.translate.domain;
+package com.bhy.translatefree.translate.domain;
 
-import java.util.List;
 import lombok.Data;
 
+import java.util.List;
+
+
 /**
- * @author luxingxiao
+ * @author oceanBin
  */
 @Data
 public class TranslateRequest {
